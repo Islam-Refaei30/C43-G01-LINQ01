@@ -69,7 +69,7 @@ namespace Demo
 			//}
 			#endregion
 
-			#region Data Setup
+			#region Part 06 DataSetup
 			Console.WriteLine(ProductList[0]);
 			Console.WriteLine(CustomerList[0]);
 			#endregion
