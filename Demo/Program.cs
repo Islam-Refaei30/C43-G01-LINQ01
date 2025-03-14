@@ -1,4 +1,5 @@
-﻿namespace Demo
+﻿using static Demo.ListGenerator;
+namespace Demo
 {
     internal class Program
     {
@@ -59,15 +60,19 @@
 			#endregion
 
 			#region Immediate Execution
-			List<int> Numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 7, 5, 4 };
-			var Result = Numbers.Where((N => N % 2 == 1)).ToList(); //Casting (ToList) is Immediate Execution
-			Numbers.AddRange(new int[] { 11, 12, 13, 14, 15, 16, 17, 18 });
-			foreach (int N in Result)
-			{
-				Console.WriteLine(N);
-			}
+			//List<int> Numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 7, 5, 4 };
+			//var Result = Numbers.Where((N => N % 2 == 1)).ToList(); //Casting (ToList) is Immediate Execution
+			//Numbers.AddRange(new int[] { 11, 12, 13, 14, 15, 16, 17, 18 });
+			//foreach (int N in Result)
+			//{
+			//	Console.WriteLine(N);
+			//}
 			#endregion
 
+			#region Data Setup
+			Console.WriteLine(ProductList[0]);
+			Console.WriteLine(CustomerList[0]);
+			#endregion
 			#endregion
 		}
 	}
