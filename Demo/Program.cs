@@ -1,10 +1,10 @@
 ﻿using static Demo.ListGenerator;
 namespace Demo
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
 			#region Part 03 What Is Linq
 			//Console.WriteLine("test Push Demo");
 
@@ -108,6 +108,90 @@ namespace Demo
 			//}
 			#endregion
 
+			#endregion
+
+			#region Part 08 Transformation [Projection] Operators
+			#region Select product name
+			////Fluent Syntax
+			//var result = ProductList.Select(P => P.ProductName);
+
+			////Query Syntax
+			//result = from P in ProductList
+			//		 select P.ProductName;
+
+			#endregion
+			#region Select customer name
+			////Fluent Syntax
+			//var result = CustomerList.Select(C => C.CustomerName);
+
+			////Query Syntax
+			//result = from C in CustomerList
+			//		 select C.CustomerName;
+
+			#endregion
+			#region Select customer orders [Select Many]
+			////Fluent Syntax 
+			//var result = CustomerList.SelectMany(C => C.Orders);
+
+			////Query Syntax
+			//result = from C in CustomerList
+			//		 from O in C.Orders
+			//		 select O;
+
+			#endregion
+			#region Select product id and product name
+			////Fluent Syntax 
+			//var result = ProductList.Select(P => new Product2() { ProductID = P.ProductID, ProductName = P.ProductName });
+			//var result2 = ProductList.Select(P => new { ProductID = P.ProductID, ProductName = P.ProductName }); //Anonymous Object
+			//var result3 = ProductList.Select(P => new {  P.ProductID, P.ProductName }); //Anonymous Object with Syntax Suger
+			////CLR will creat Class in Runtime and override on ToString
+
+			////Query Syntax
+			//var result4 = from P in ProductList
+			//		 select new
+			//		 {
+			//			 ProductID = P.ProductID,
+			//			 ProductName = P.ProductName
+			//		 };
+			#endregion
+			#region Select product in stock and apply discount 10 % on its price
+			////Fluent Syntax 
+			//var result = ProductList.Where(P => P.UnitsInStock > 0)
+			// .Select(P => new
+			// {
+			//	 ID = P.ProductID,
+			//	 Name = P.ProductName,
+			//	 OldPrice = P.UnitPrice,
+			//	 NewPrice = P.UnitPrice - (P.UnitPrice * 0.1M)
+
+			// });
+
+			////Query Syntax
+			//var result2 = from P in ProductList
+			//			  where P.UnitsInStock > 0
+			//			  select new
+			//			  {
+			//				  ID = P.ProductID,
+			//				  Name = P.ProductName,
+			//				  OldPrice = P.UnitPrice,
+			//				  NewPrice = P.UnitPrice - (P.UnitPrice * 0.1M)
+			//			  };
+
+			#endregion
+			#region Select product index and product name for products in stock
+			//Indexed Select 
+			//Valid only with fluent syntax
+			var result = ProductList.Where(P => P.UnitPrice > 0)
+				.Select((P, I) => new
+				{
+					Index = I,
+					Name = P.ProductName
+				});
+			#endregion
+			foreach (var item in result)
+			{
+				Console.WriteLine(item);
+			}
 			#endregion
 		}
 	}
