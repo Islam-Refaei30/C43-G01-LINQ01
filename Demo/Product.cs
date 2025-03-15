@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Demo
 {
-	internal class Product
+	internal class Product:IComparable<Product>
 	{
 		public long ProductID { get; set; }
 		public string ProductName { get; set; }
@@ -14,6 +14,11 @@ namespace Demo
 		public decimal UnitPrice { get; set; }
 		public int UnitsInStock { get; set; }
 
+		public int CompareTo(Product? other)
+		{
+			return this.UnitPrice.CompareTo(other?.UnitPrice);
+			//return UnitPrice.CompareTo(UnitPrice);
+		}
 
 		public override string ToString()
 			=> $"ProductID: {ProductID}, ProductName: {ProductName}, Category: {Category}, UnitPrice: {UnitPrice:c}, UnitsInStock: {UnitsInStock}";

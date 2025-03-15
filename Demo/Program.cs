@@ -179,20 +179,65 @@ namespace Demo
 
 			#endregion
 			#region Select product index and product name for products in stock
-			//Indexed Select 
-			//Valid only with fluent syntax
-			var result = ProductList.Where(P => P.UnitPrice > 0)
-				.Select((P, I) => new
-				{
-					Index = I,
-					Name = P.ProductName
-				});
+			////Indexed Select 
+			////Valid only with fluent syntax
+			//var result = ProductList.Where(P => P.UnitPrice > 0)
+			//	.Select((P, I) => new
+			//	{
+			//		Index = I,
+			//		Name = P.ProductName
+			//	});
+			//#endregion
+			//foreach (var item in result)
+			//{
+			//	Console.WriteLine(item);
+			//}
+			#endregion
+			#endregion
+
+			#region Part 09 Ordering Operators
+			#region Get Products Ordered By Price Asc
+			////Fluent Syntax
+			//var result = ProductList.OrderBy(P => P.UnitPrice);
+
+			//var result2 = ProductList.Order();
+			////System.InvalidOperationException
+
+			////Query Syntax
+			//result = from P in ProductList
+			//		 orderby P.UnitPrice ascending
+			//		 select P;
+			#endregion
+			#region Get Products Ordered By Price Desc
+			//Fluent Syntax
+			//var result = ProductList.OrderByDescending(p => p.UnitPrice);
+
+			////Query Syntax
+			//result = from P in ProductList
+			//		 orderby P.UnitPrice descending
+			//		 select P;
+			#endregion
+			#region Get Products Ordered By Price Asc and Number Of Items In Stock
+			////Fluent Syntax
+			////var result = ProductList.OrderBy(P => P.UnitPrice).ThenBy(P => P.UnitsInStock);
+			//var result = ProductList.OrderBy(P => P.UnitPrice).ThenByDescending(P => P.UnitsInStock);
+
+			////Query Syntax
+			//result = from P in ProductList
+			//		 orderby P.UnitPrice, P.UnitsInStock descending
+			//		 select P;
+
+			#endregion
+			#region Reverse
+			var result = ProductList.Where(P => P.UnitsInStock > 0).Reverse();
 			#endregion
 			foreach (var item in result)
 			{
 				Console.WriteLine(item);
 			}
 			#endregion
+
+
 		}
 	}
 }
